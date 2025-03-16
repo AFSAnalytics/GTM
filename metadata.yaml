@@ -15,5 +15,6 @@
 homepage: "https://www.afsanalytics.com.com"
 documentation: "https://help.afsnalytics.com/"
 versions:
-  - sha: 
+  - sha:
     changeNotes: Initial Version
+sha: 33a53fe4bd0eab0a9466fc86b4d4f6924bd759bd
