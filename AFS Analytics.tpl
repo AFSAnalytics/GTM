@@ -14,7 +14,6 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "AFS Analytics",
-  "categories": ["ANALYTICS", "HEAT_MAP","MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -42,9 +41,6 @@ ___TEMPLATE_PARAMETERS___
           8,
           8
         ]
-      },
-      {
-        "type": "NON_EMPTY"
       },
       {
         "type": "NON_EMPTY"
@@ -521,6 +517,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 16/03/2025 16:34:53
+Created on 16/03/2025 20:54:01
 
 
