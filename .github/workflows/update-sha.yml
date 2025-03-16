@@ -1,0 +1,29 @@
+name: Update SHA in YAML
+
+on:
+  push:
+    branches:
+      - main  # Modifier si nécessaire
+
+jobs:
+  update-sha:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get commit SHA
+        id: sha
+        run: echo "SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+      - name: Update metadata.yaml
+        run: |
+          yq eval '.sha = env(SHA)' -i metadata.yaml
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add version.yaml
+          git commit -m "Update SHA version"
+          git push
