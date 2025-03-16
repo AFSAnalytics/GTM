@@ -14,6 +14,7 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "AFS Analytics",
+  "categories": ["ANALYTICS", "HEAT_MAP","MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
