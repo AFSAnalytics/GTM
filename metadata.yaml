@@ -16,5 +16,5 @@
 homepage: "https://www.afsanalytics.com.com"
 documentation: "https://help.afsnalytics.com/"
 versions:
- -  changeNotes: Initial Version
- 
+  - changeNotes: Initial Version
+sha: 657dd59d98d71ff37f363e0c5f2f52581d40bfe9
