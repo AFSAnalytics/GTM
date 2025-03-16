@@ -14,7 +14,6 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "AFS Analytics",
-  "categories": ["ANALYTICS", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -34,7 +33,66 @@ ___TEMPLATE_PARAMETERS___
     "type": "TEXT",
     "name": "websiteid",
     "displayName": "Website ID",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "valueValidators": [
+      {
+        "type": "STRING_LENGTH",
+        "args": [
+          8,
+          8
+        ]
+      },
+      {
+        "type": "NON_EMPTY"
+      },
+      {
+        "type": "NON_EMPTY"
+      }
+    ]
+  },
+  {
+    "type": "SELECT",
+    "name": "autotrack",
+    "displayName": "AutoTrack",
+    "macrosInSelect": false,
+    "selectItems": [
+      {
+        "value": "on",
+        "displayValue": "On"
+      },
+      {
+        "value": "dataset",
+        "displayValue": "Dataset"
+      },
+      {
+        "value": "off",
+        "displayValue": "Off"
+      }
+    ],
+    "simpleValueType": true,
+    "defaultValue": "on"
+  },
+  {
+    "type": "SELECT",
+    "name": "pagedetect",
+    "displayName": "Page Name Detection",
+    "macrosInSelect": true,
+    "selectItems": [
+      {
+        "value": "*auto*",
+        "displayValue": "Auto"
+      },
+      {
+        "value": "*title*",
+        "displayValue": "Title"
+      },
+      {
+        "value": "{{Page URL}}",
+        "displayValue": "URL"
+      }
+    ],
+    "simpleValueType": true,
+    "defaultValue": "*auto*"
   }
 ]
 
@@ -43,12 +101,12 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 // Saisissez le code de votre modèle ici.
 const log = require('logToConsole');
-log('data =', data);
+//log('data =', data);
 
-
+const readTitle = require('readTitle');
 const injectScript = require('injectScript');
 const queryPermission = require('queryPermission');
-const copyFromWindow = require('copyFromWindow');
+//const copyFromWindow = require('copyFromWindow');
 const setInWindow = require('setInWindow');
 const createArgumentsQueue = require('createArgumentsQueue');
 const getTimestamp = require('getTimestamp');
@@ -56,6 +114,8 @@ const aa = createArgumentsQueue('aa', 'aa.q');
 
 const url = 'https://code.afsanalytics.com/js/analytics.js';
 const websiteid = data.websiteid;
+const autotrack=data.autotrack;
+var pagedetect=data.pagedetect;
 
 setInWindow("AfsAnalyticsObject", "aa",true);
 setInWindow('aa.l', getTimestamp(), true);
@@ -71,11 +131,19 @@ const onFailure= () => {
 };
 
 aa('create', websiteid, 'auto');
-aa("set","autotrack","on");
-aa('send', 'pageview');
+aa("set","autotrack",autotrack);
 
-const test=copyFromWindow("aa.q");
-log("aa->",test);
+if (pagedetect.indexOf("*title*")!=-1) 
+{
+  if (queryPermission('read_title')) pagedetect= readTitle();
+  else pagedetect="*auto*";
+}
+
+if (pagedetect.indexOf("*auto*")!=-1 ) aa('send', 'pageview');
+else aa ('send', 'pageview','autoindex',pagedetect);
+
+//const test=copyFromWindow("aa.q");
+//log("aa->",test);
 
 
 if (queryPermission('inject_script', 'https://code.afsanalytics.com/js/analytics.js')) {
@@ -431,6 +499,16 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "read_title",
+        "versionId": "1"
+      },
+      "param": []
+    },
+    "isRequired": true
   }
 ]
 
@@ -442,6 +520,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 15/03/2025 19:24:15
+Created on 16/03/2025 16:34:53
 
 
