@@ -24,6 +24,6 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add version.yaml
+          git add metadata.yaml
           git commit -m "Update SHA version"
           git push
