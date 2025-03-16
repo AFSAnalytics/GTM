@@ -18,7 +18,7 @@ jobs:
 
       - name: Update metadata.yaml
         run: |
-          yq eval '.sha = env(SHA)' -i metadata.yaml
+          yq eval '.sha = "-"+env(SHA)' -i metadata.yaml
 
       - name: Commit changes
         run: |
