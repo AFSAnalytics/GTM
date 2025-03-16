@@ -18,7 +18,8 @@ jobs:
 
       - name: Update metadata.yaml
         run: |
-              yq eval '. |= [{"sha": env(SHA)}]' -i metadata.yml
+          yq eval '. |= [{"sha": env(SHA)}]' -i version.yaml
+               
       - name: Commit changes
         run: |
           git config --global user.name "github-actions"
