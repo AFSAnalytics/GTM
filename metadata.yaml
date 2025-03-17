@@ -14,5 +14,5 @@
 homepage: "https://www.afsanalytics.com"
 documentation: "https://help.afsanalytics.com/en/install/google_tag_manager/"
 versions:
-  - sha: f3a4fd0c3660bc0a1f731312e37e58a023be376b
+  - sha: b0df75711490fffc7c12a4ac94756414c545271a
     changeNotes: Initial Version
