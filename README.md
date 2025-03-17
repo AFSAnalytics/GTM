@@ -23,6 +23,7 @@ Defines how AFS Analytics detects the page name:
 - **URL**: The page URL is used as the page name.
 
 ## Resources
+- [AFS ANALYTICS GTM](https://help.afsanalytics.com/en/install/google_tag_manager/)
 - [Page Tracking](https://help.afsanalytics.com/en/developers/page-tracking/)
 - [AutoTrack](https://help.afsanalytics.com/en/developers/autotrack/)
 - [Event Tracking](https://help.afsanalytics.com/en/developers/event-tracking/)
